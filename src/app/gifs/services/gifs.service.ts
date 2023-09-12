@@ -12,7 +12,10 @@ export class GifsService {
   private _apiKey: string = 'K1TP3l79EczJc8bIdzij54BJ5MZ5o5Jd';
   public results: Gif[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+      
+      this._history = JSON.parse(localStorage.getItem('history')!) || [];
+  }
 
   get history() {
     return [...this._history];
@@ -21,8 +24,11 @@ export class GifsService {
   addHistory = (item: string = ''): void => {
     item = item.trim().toLowerCase();
     if (!this._history.includes(item)) {
+
       this._history.unshift(item);
       this._history = this._history.splice(0, 10);
+
+      localStorage.setItem('history', JSON.stringify(this._history));
     }
     console.log(this.history);
     // fetch('https://api.giphy.com/v1/gifs/search?api_key=K1TP3l79EczJc8bIdzij54BJ5MZ5o5Jd&q=DBZ&limit=10')
