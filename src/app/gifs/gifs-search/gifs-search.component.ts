@@ -13,7 +13,7 @@ export class GifsSearchComponent {
   search = (): void => {
     const value = this.txtSearch.nativeElement.value;
     if(value.trim().length !== 0) {
-      this.service.addHistory(value);
+      this.service.searchGifs(value);
       this.txtSearch.nativeElement.value = '';
     }
   };

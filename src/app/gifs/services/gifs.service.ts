@@ -23,7 +23,7 @@ export class GifsService {
     return [...this._history];
   }
 
-  addHistory = (item: string = ''): void => {
+  searchGifs = (item: string = ''): void => {
     item = item.trim().toLowerCase();
     if (!this._history.includes(item)) {
 
@@ -32,13 +32,7 @@ export class GifsService {
 
       localStorage.setItem('history', JSON.stringify(this._history));
     }
-    console.log(this.history);
-    // fetch('https://api.giphy.com/v1/gifs/search?api_key=K1TP3l79EczJc8bIdzij54BJ5MZ5o5Jd&q=DBZ&limit=10')
-    //   .then(resp => {
-    //     resp.json().then(data => {
-    //       console.log(data);
-    //     })
-    //   })
+
     this.http
       .get<SearchGifResponse>(
         `https://api.giphy.com/v1/gifs/search?api_key=K1TP3l79EczJc8bIdzij54BJ5MZ5o5Jd&q=${item}&limit=10`
