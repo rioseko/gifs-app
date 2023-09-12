@@ -15,6 +15,8 @@ export class GifsService {
   constructor(private http: HttpClient) {
       
       this._history = JSON.parse(localStorage.getItem('history')!) || [];
+      this.results = JSON.parse(localStorage.getItem('lastResult')!) || [];
+
   }
 
   get history() {
@@ -44,6 +46,7 @@ export class GifsService {
       .subscribe((response) => {
         console.log(response.data);
         this.results = response.data;
+        localStorage.setItem('lastResult', JSON.stringify(this.results));
       });
   };
 }
